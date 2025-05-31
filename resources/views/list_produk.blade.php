@@ -29,26 +29,23 @@
         </tbody>
     </table>
 </div>
-<div><h1>Input Produk</h1></div>
-<form method="POST" action="{{ route('produk.simpan') }}">
-    <table class="table">
-        <tr>
-            <td>Nama</td>
-            <td colspan="3">
-                <input type="text" class="form-control" id="nama" name="nama"> </td>
-            </tr>
-            <tr>
-                <td>Deskripsi</td>
-                <td colspan="3">
-                    <textarea class="form-control" id="deskripsi" name="deskripsi"></textarea>
-                </td>
-            </tr>
-            <tr>
-                <td>Harga</td>
-                <td><input type="number" class="form-control" id="harga" name="harga"></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
-        <button type="submit" class="btn btn-primary">Simpan</button>
-    </form>
+<div class="mt-8 mb-4">
+    <h1 class="text-2xl font-bold text-gray-800 mb-4 text-center">Input Produk</h1>
+</div>
+<form method="POST" action="{{ route('produk.simpan') }}" class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
+    @csrf
+    <div class="mb-4">
+        <label for="nama" class="block text-gray-700 font-medium mb-2">Nama</label>
+        <input type="text" id="nama" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+    </div>
+    <div class="mb-4">
+        <label for="deskripsi" class="block text-gray-700 font-medium mb-2">Deskripsi</label>
+        <textarea id="deskripsi" name="deskripsi" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required></textarea>
+    </div>
+    <div class="mb-6">
+        <label for="harga" class="block text-gray-700 font-medium mb-2">Harga</label>
+        <input type="number" id="harga" name="harga" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+    </div>
+    <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">Simpan</button>
+</form>
+
