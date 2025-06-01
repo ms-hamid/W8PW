@@ -17,4 +17,15 @@ class ListProdukController extends Controller
         }
         return view('list_produk', compact('nama', 'deskripsi', 'harga'));
     }
+
+    public function simpan(Request $request)
+    {
+        $produk = new Produk();
+        $produk->name = $request->input('nama');
+        $produk->description = $request->input('deskripsi');
+        $produk->price = $request->input('harga');
+        $produk->save();
+
+        return redirect()->back()->with('success', 'Produk berhasil disimpan!');
+    }
 }

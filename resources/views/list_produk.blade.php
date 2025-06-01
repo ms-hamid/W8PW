@@ -7,6 +7,7 @@
                 <th scope="col" class="px-6 py-3 text-[#000000] border-b border-gray-300 font-semibold bg-transparent">Nama Produk</th>
                 <th scope="col" class="px-6 py-3 text-[#000000] border-b border-gray-300 font-semibold bg-transparent">Deskripsi Produk</th>
                 <th scope="col" class="px-6 py-3 text-[#000000] border-b border-gray-300 font-semibold bg-transparent">Harga Produk</th>
+                <th scope="col" class="px-6 py-3 text-[#000000] border-b border-gray-300 font-semibold bg-transparent">Aksi</th>
             </tr>
         </thead>
         <tbody>
@@ -23,6 +24,13 @@
                     </td>
                     <td class="px-6 py-4 text-[#1f1f1f]">
                         {{ $harga[$index] }}
+                    </td>
+                    <td class="px-6 py-4">
+                        <form action="{{ route('produk.hapus', $id) }}" method="POST" class="inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
@@ -48,4 +56,3 @@
     </div>
     <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">Simpan</button>
 </form>
-
