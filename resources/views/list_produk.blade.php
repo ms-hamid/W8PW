@@ -26,6 +26,9 @@
                         {{ $produk->price }}
                     </td>
                     <td class="px-6 py-4">
+                        <button type="button"
+                            onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->name) }}', '{{ addslashes($produk->description) }}', {{ $produk->price }})"
+                            class="text-blue-600 hover:text-blue-800 font-semibold mr-2">Edit</button>
                         <form action="{{ route('produk.hapus', $produk->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
@@ -56,3 +59,46 @@
     </div>
     <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">Simpan</button>
 </form>
+
+<!-- Modal Edit Produk -->
+<div id="editModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-40 hidden">
+    <div class="bg-white rounded-lg p-6 w-full max-w-lg relative">
+        <button type="button" onclick="closeModal()" class="absolute top-2 right-3 text-gray-500 text-xl">&times;</button>
+        <h2 class="text-xl font-bold mb-4">Edit Produk</h2>
+        <form id="editForm" method="POST">
+            @csrf
+            @method('PUT')
+            <div class="mb-4">
+                <label for="edit_nama" class="block text-gray-700 font-medium mb-2">Nama</label>
+                <input type="text" id="edit_nama" name="nama" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+            </div>
+            <div class="mb-4">
+                <label for="edit_deskripsi" class="block text-gray-700 font-medium mb-2">Deskripsi</label>
+                <textarea id="edit_deskripsi" name="deskripsi" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-md" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="edit_harga" class="block text-gray-700 font-medium mb-2">Harga</label>
+                <input type="number" id="edit_harga" name="harga" class="w-full px-4 py-2 border border-gray-300 rounded-md" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-md hover:bg-blue-700 transition">Update</button>
+            <button type="button" onclick="closeModal()" class="w-full mt-2 bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-md hover:bg-gray-400 transition">Batal</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function openEditModal(id, name, description, price) {
+    const modal = document.getElementById('editModal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.getElementById('edit_nama').value = name;
+    document.getElementById('edit_deskripsi').value = description;
+    document.getElementById('edit_harga').value = price;
+    document.getElementById('editForm').action = '/list/' + id;
+}
+function closeModal() {
+    const modal = document.getElementById('editModal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+</script>

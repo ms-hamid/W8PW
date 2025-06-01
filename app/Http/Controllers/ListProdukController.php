@@ -34,4 +34,15 @@ class ListProdukController extends Controller
             return redirect()->back()->with('error', 'Produk tidak ditemukan!');
         }
     }
+    
+    public function update(Request $request, $id)
+    {
+        $produk = Produk::findOrFail($id);
+        $produk->name = $request->input('nama');
+        $produk->description = $request->input('deskripsi');
+        $produk->price = $request->input('harga');
+        $produk->save();
+
+        return redirect()->back()->with('success', 'Produk berhasil diupdate!');
+    }
 }
