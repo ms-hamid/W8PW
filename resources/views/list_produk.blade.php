@@ -11,25 +11,25 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($nama as $index => $item)
+            @foreach ($data as $index => $produk)
                 <tr class="bg-transparent border-b border-gray-300 hover:bg-gray-100/30">
                     <th scope="row" class="px-6 py-4 font-medium text-[#1f1f1f] whitespace-nowrap">
                         {{ $index + 1 }}
                     </th>
                     <td class="px-6 py-4 font-medium text-[#1f1f1f] whitespace-nowrap">
-                        {{ $item }}
+                        {{ $produk->name }}
                     </td>
                     <td class="px-6 py-4 text-[#1f1f1f]">
-                        {{ $deskripsi[$index] }}
+                        {{ $produk->description }}
                     </td>
                     <td class="px-6 py-4 text-[#1f1f1f]">
-                        {{ $harga[$index] }}
+                        {{ $produk->price }}
                     </td>
                     <td class="px-6 py-4">
-                        <form action="{{ route('produk.hapus', $id) }}" method="POST" class="inline">
+                        <form action="{{ route('produk.hapus', $produk->id) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</button>
+                            <button type="submit" onclick="return confirm('Apakah Anda yakin ingin menghapus produk {{$produk->name}} ini?')" class="text-red-600 hover:text-red-800 font-semibold">Hapus</button>
                         </form>
                     </td>
                 </tr>
